@@ -3,6 +3,7 @@ import time
 import threading
 import sys
 import os
+import datetime
 
 import RPi.GPIO as GPIO
 
@@ -14,6 +15,7 @@ import ultrasonic_sensor_4
 import ultrasonic_sensor_5
 import ultrasonic_sensor_6
 import ultrasonic_sensor_7
+import log_damba
 
 #左キャタピラ
 motor1_pin = 17 #前進
@@ -62,6 +64,7 @@ def play():
     stairs = 0 #階段上
     sett = 0
     print("前進")
+    log_damba.memo_write("開始時前進---------------------------")
     GPIO.output(motor1_pin, True)
     GPIO.output(motor2_pin, False)
     GPIO.output(motor3_pin, True)
@@ -84,20 +87,24 @@ def play():
             }
         
         print(distance)
+        #log_damba.memo_write(distance)
 
         if distance["right_front"] <= out_distance and distance["right_front"] != -1 and sett == 0 \
             or distance["left_front"] <= out_distance and distance["left_front"] != -1 and sett == 0:#前方に何かある
             
             print("壁検知")
+            log_damba.memo_write("壁検知")
             GPIO.output(motor1_pin, False)
             GPIO.output(motor2_pin, False)
             GPIO.output(motor3_pin, False)
             GPIO.output(motor4_pin, False)
             print("停止")
+            log_damba.memo_write("停止")
         
             if distance["top"] >= wall_distance and distance["top"] != -1:#階段
 
                 print("上階段対処")
+                log_damba.memo_write("上階段対処")
 
                 while True:
 
@@ -109,12 +116,13 @@ def play():
                     distance1 = distance["left_front"] - distance["right_front"]
 
                     print(str(distance_sub1) + ":" + str(distance_sub2) + ":" + str(distance1))
-                    
+                    log_damba.memo_write("上階段対処distance_sub1:distance_sub2:distance1;" + str(distance_sub1) + ":" + str(distance_sub2) + ":" + str(distance1))
                     if distance["right_front"] != -1 and distance["left_front"] != -1:
                         
                         if distance["left_front"] <= wall_d_distance:
 
                             print("近づきすぎバック")
+                            log_damba.memo_write("近づきすぎバック")
                             GPIO.output(motor1_pin, False)
                             GPIO.output(motor2_pin, True)
                             GPIO.output(motor3_pin, False)
@@ -128,6 +136,7 @@ def play():
                         if distance1 >= difference_distance:#右が前に出てる
 
                             print("右折")
+                            log_damba.memo_write("右折")
                             GPIO.output(motor1_pin, True)
                             GPIO.output(motor2_pin, False)
                             #GPIO.output(motor3_pin, False)
@@ -138,10 +147,12 @@ def play():
                             GPIO.output(motor3_pin, False)
                             GPIO.output(motor4_pin, False)
                             print("停止")
+                            log_damba.memo_write("停止")
 
                         if distance1 * -1 >= difference_distance:#左が前に出てる
 
                             print("左折")
+                            log_damba.memo_write("左折")
                             step_turn_time2 = step_turn_time + 1
                             #GPIO.output(motor1_pin, False)
                             #GPIO.output(motor2_pin, True)
@@ -153,6 +164,7 @@ def play():
                             GPIO.output(motor3_pin, False)
                             GPIO.output(motor4_pin, False)
                             print("停止")
+                            log_damba.memo_write("停止")
 
                         if distance1 < difference_distance and distance1 * -1 < difference_distance:
                             break    
@@ -160,6 +172,7 @@ def play():
                     time.sleep(0.1)
 
                 print("前進")
+                log_damba.memo_write("前進")
                 GPIO.output(motor1_pin, True)
                 GPIO.output(motor2_pin, False)
                 GPIO.output(motor3_pin, True)
@@ -167,13 +180,16 @@ def play():
                 #前進
 
                 print("上階段対処完了")
+                log_damba.memo_write("上階段対処完了")
                 stairs = 1
                 sett = 1
             
             if distance["top"] < wall_distance and distance["top"] != -1 and sett == 0:#壁
                 
                 print("壁対処")
+                log_damba.memo_write("壁対処")
                 print("バック")
+                log_damba.memo_write("バック")
                 GPIO.output(motor1_pin, False)
                 GPIO.output(motor2_pin, True)
                 GPIO.output(motor3_pin, False)
@@ -185,10 +201,12 @@ def play():
                 GPIO.output(motor4_pin, False)
                 distance1 = distance["left_front"] - distance["right_front"]
                 print(str(distance1))
+                log_damba.memo_write("壁対処distance1:" + str(distance1))
 
                 if distance1 > 0:#右が前に出てる
 
                     print("左折")
+                    log_damba.memo_write("左折")
                     GPIO.output(motor1_pin, False)
                     GPIO.output(motor2_pin, False)
                     GPIO.output(motor3_pin, True)
@@ -199,10 +217,12 @@ def play():
                     GPIO.output(motor3_pin, False)
                     GPIO.output(motor4_pin, False)
                     print("停止")
+                    log_damba.memo_write("停止")
 
                 if distance1 <= 0:#左が前に出てる
 
                     print("右折")
+                    log_damba.memo_write("右折")
                     GPIO.output(motor1_pin, True)
                     GPIO.output(motor2_pin, False)
                     GPIO.output(motor3_pin, False)
@@ -213,13 +233,16 @@ def play():
                     GPIO.output(motor3_pin, False)
                     GPIO.output(motor4_pin, False)
                     print("停止")
+                    log_damba.memo_write("停止")
 
                 print("前進")
+                log_damba.memo_write("前進")
                 GPIO.output(motor1_pin, True)
                 GPIO.output(motor2_pin, False)
                 GPIO.output(motor3_pin, True)
                 GPIO.output(motor4_pin, False)
                 print("壁対処完了")
+                log_damba.memo_write("壁対処完了")
                 #前進
                 sett = 1
 
@@ -228,13 +251,16 @@ def play():
             or distance["left_under"] >= under_out_distance and distance["left_under"] != -1 and sett == 0:#下階段
 
             print("下階段検知")
+            log_damba.memo_write("下階段検知")
             GPIO.output(motor1_pin, False)
             GPIO.output(motor2_pin, False)
             GPIO.output(motor3_pin, False)
             GPIO.output(motor4_pin, False)
             print("停止")
+            log_damba.memo_write("停止")
 
             print("下階段対処")
+            log_damba.memo_write("下階段対処")
 
             ff2 = True
             dis_time = 0
@@ -245,6 +271,7 @@ def play():
                 if distance_sub2 <= under_out_distance and distance_sub2 != -1:#右
                     
                     print("右折")
+                    log_damba.memo_write("右折")
                     GPIO.output(motor1_pin, True)
                     GPIO.output(motor2_pin, False)
                     GPIO.output(motor3_pin, False)
@@ -255,6 +282,7 @@ def play():
                         distance_sub4 = ultrasonic_sensor_4.reading(1)#左
                         if distance_sub4 >= under_out_distance and distance_sub4 != -1:#左
                             print("バック")
+                            log_damba.memo_write("バック")
                             GPIO.output(motor1_pin, False)
                             GPIO.output(motor2_pin, True)
                             GPIO.output(motor3_pin, False)
@@ -271,6 +299,7 @@ def play():
                                             t2 = time.time()
                                             dis_time = t2 - t
                                             print("前進")
+                                            log_damba.memo_write("前進")
                                             GPIO.output(motor1_pin, True)
                                             GPIO.output(motor2_pin, False)
                                             GPIO.output(motor3_pin, True)
@@ -279,8 +308,10 @@ def play():
                                                 distance_sub２ = ultrasonic_sensor_２.reading(1)#右
                                                 if distance_sub２ >= under_out_distance and distance_sub２ != -1:#右
                                                     ff = False
-                                                    print(dis_time)
+                                                    print(str(dis_time))
+                                                    log_damba.memo_write("下階段対処dis_time:" + str(dis_time))
                                                     print("停止")
+                                                    log_damba.memo_write("停止")
                                                     GPIO.output(motor1_pin, False)
                                                     GPIO.output(motor2_pin, False)
                                                     GPIO.output(motor3_pin, False)
@@ -298,6 +329,7 @@ def play():
                                             t2 = time.time()
                                             dis_time = t2 - t
                                             print("前進")
+                                            log_damba.memo_write("前進")
                                             GPIO.output(motor1_pin, True)
                                             GPIO.output(motor2_pin, False)
                                             GPIO.output(motor3_pin, True)
@@ -306,8 +338,10 @@ def play():
                                                 distance_sub4 = ultrasonic_sensor_4.reading(1)#左
                                                 if distance_sub4 >= under_out_distance and distance_sub4 != -1:#左
                                                     ff = False
-                                                    print(dis_time)
+                                                    print(str(dis_time))
+                                                    log_damba.memo_write("下階段対処dis_time:" + str(dis_time))
                                                     print("停止")
+                                                    log_damba.memo_write("停止")
                                                     GPIO.output(motor1_pin, False)
                                                     GPIO.output(motor2_pin, False)
                                                     GPIO.output(motor3_pin, False)
@@ -318,6 +352,7 @@ def play():
                 if distance_sub4 <= under_out_distance and distance_sub4 != -1:#左
                     
                     print("左折")
+                    log_damba.memo_write("左折")
                     GPIO.output(motor1_pin, False)
                     GPIO.output(motor2_pin, False)
                     GPIO.output(motor3_pin, True)
@@ -328,6 +363,7 @@ def play():
                         distance_sub2 = ultrasonic_sensor_2.reading(1)#右1
                         if distance_sub2 >= under_out_distance and distance_sub2 != -1:
                             print("バック")
+                            log_damba.memo_write("バック")
                             GPIO.output(motor1_pin, False)
                             GPIO.output(motor2_pin, True)
                             GPIO.output(motor3_pin, False)
@@ -344,6 +380,7 @@ def play():
                                             t2 = time.time()
                                             dis_time = t2 - t
                                             print("前進")
+                                            log_damba.memo_write("前進")
                                             GPIO.output(motor1_pin, True)
                                             GPIO.output(motor2_pin, False)
                                             GPIO.output(motor3_pin, True)
@@ -352,8 +389,10 @@ def play():
                                                 distance_sub4 = ultrasonic_sensor_4.reading(1)#左
                                                 if distance_sub4>= under_out_distance and distance_sub4 != -1:#左
                                                     ff = False
-                                                    print(dis_time)
+                                                    print(str(dis_time))
+                                                    log_damba.memo_write("下階段対処dis_time:" + str(dis_time))
                                                     print("停止")
+                                                    log_damba.memo_write("停止")
                                                     GPIO.output(motor1_pin, False)
                                                     GPIO.output(motor2_pin, False)
                                                     GPIO.output(motor3_pin, False)
@@ -371,6 +410,7 @@ def play():
                                             t2 = time.time()
                                             dis_time = t2 - t
                                             print("前進")
+                                            log_damba.memo_write("前進")
                                             GPIO.output(motor1_pin, True)
                                             GPIO.output(motor2_pin, False)
                                             GPIO.output(motor3_pin, True)
@@ -380,7 +420,9 @@ def play():
                                                 if distance_sub2 >= under_out_distance and distance_sub2 != -1:#右1
                                                     ff = False
                                                     print(dis_time)
+                                                    log_damba.memo_write("下階段対処dis_time:" + dis_time)
                                                     print("停止")
+                                                    log_damba.memo_write("停止")
                                                     GPIO.output(motor1_pin, False)
                                                     GPIO.output(motor2_pin, False)
                                                     GPIO.output(motor3_pin, False)
@@ -402,18 +444,22 @@ def play():
             GPIO.output(motor3_pin, False)
             GPIO.output(motor4_pin, False)
             print("停止")
+            log_damba.memo_write("停止")
             print("前進")
+            log_damba.memo_write("前進")
             GPIO.output(motor1_pin, True)
             GPIO.output(motor2_pin, False)
             GPIO.output(motor3_pin, True)
             GPIO.output(motor4_pin, False)
             #前進
             print("下階段対処完了")
+            log_damba.memo_write("下階段対処完了")
             sett = 1
             stairs = 1
 
         if stairs == 1:
             print("階段通過中")
+            log_damba.memo_write("階段通過中")
             t = 0
             while True:
                 distance_stairs1 = ultrasonic_sensor_2.reading(1)
@@ -421,6 +467,7 @@ def play():
                 distance["right_under"] = distance_stairs1
                 distance["left_under"] = distance_stairs2
                 print(str(distance_stairs1) + ":" + str(distance_stairs2))
+                log_damba.memo_write("階段通過中;distance_stairs1:distance_stairs2;" + str(distance_stairs1) + ":" + str(distance_stairs2))
 
                 if distance["right_under"] <= under_out_distance and distance["right_under"] != -1 \
                     and distance["left_under"] <= under_out_distance and distance["left_under"] != -1 :
@@ -429,6 +476,7 @@ def play():
                 
                 if t == stairs_time:
                     print("階段通過完了")
+                    log_damba.memo_write("階段通過完了")
                     stairs = 0
                     break
 

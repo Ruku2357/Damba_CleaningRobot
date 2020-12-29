@@ -3,6 +3,7 @@ import time
 import sys
 import os
 import ultrasonic_sensor_6
+import log_damba
 
 def do():
     i = 0
@@ -64,4 +65,6 @@ def damba():
         time.sleep(10)
         sys.exit()
 
-controller()
+#controller()
+
+log_damba.memo_write("aaaa")

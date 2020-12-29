@@ -327,7 +327,7 @@ DAMBAの課題点
             起動時のシステムは外部に聞く
             UIは余ったセンサーでどうにかする
             ラズパイのライトをいじって状態の確認？できそうだけどできるかわからない
-            crontab -eで最後に
+            ターミナルでcrontab -eで最後に
             @reboot Python3 /home/pi/damba/rasberry_pi/main.py
             に追加して上書き保存(コントロール+XでY)
             crontab -l で保存できているか確認できる
