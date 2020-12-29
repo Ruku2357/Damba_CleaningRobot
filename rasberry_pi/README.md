@@ -14,6 +14,7 @@
 ## GitHub説明
     上のファイル(Dambaシステムの説明)  
         circuit_diagram  
+        ![circuit_diagram](circuit_diagram4.png)
             回路図(番号が大きいものが最新)(感覚的に書きました)  
         main.py  
             自動化プログラム  
