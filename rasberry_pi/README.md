@@ -29,7 +29,7 @@
             部品とかテストとかいろいろ  
     以下ラズパイのソフトウェア関係のメモや説明など  
 
-# circuit_diagram
+## circuit_diagram
 ![circuit_diagram](circuit_diagram4.png)
 
 
