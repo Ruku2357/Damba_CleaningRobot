@@ -458,6 +458,5 @@ def no_controller():
     flag = True
     play()
 
-#play()
 #controller()
 no_controller()
