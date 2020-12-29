@@ -383,6 +383,9 @@ def play():#9:stop
                     
                 if dis_time > 0 and dis_time < dis_dis_time:
                     ff2 = False
+
+                if dis_time  > 0 and dis_time * -1 < dis_dis_time:
+                    ff2 = False
                 
                 time.sleep(0.1)
 

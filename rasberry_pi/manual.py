@@ -56,25 +56,25 @@ def manual():
             motor_arm.move("left",float(manual_second))
             print("完了")
 
-        if order == 11:#距離
+        if order == 11:#右のみ
             manual_second = input("秒数->")
             print("右のモーターを" + manual_second + "秒間回転します．")
             motor_wheel.move("right_only",float(manual_second))
             print("完了")
-        
-        if order == 21:#距離
+
+        if order == 12:#右のみ逆回転
+            manual_second = input("秒数->")
+            print("右のモーターを" + manual_second + "秒間逆回転します．")
+            motor_wheel.move("right_only_back",float(manual_second))
+            print("完了")
+
+        if order == 21:#左のみ
             manual_second = input("秒数->")
             print("左のモーターを" + manual_second + "秒間回転します．")
             motor_wheel.move("left_only",float(manual_second))
             print("完了")
 
-        if order == 12:#距離
-            manual_second = input("秒数->")
-            print("右のモーターを" + manual_second + "秒間逆回転します．")
-            motor_wheel.move("right_only_back",float(manual_second))
-            print("完了")
-        
-        if order == 22:#距離
+        if order == 22:#左のみ逆回転
             manual_second = input("秒数->")
             print("左のモーターを" + manual_second + "秒間逆回転します．")
             motor_wheel.move("left_only_back",float(manual_second))
@@ -83,7 +83,7 @@ def manual():
         if order == 30:#距離
             manual_second = input("秒数->")
             print("左のモーターを" + manual_second + "秒間逆回転します．")
-            motor_wheel.move("ar,_only",float(manual_second))
+            motor_wheel.move("arm_only",float(manual_second))
             print("完了")
 
         if order == 55:#距離
