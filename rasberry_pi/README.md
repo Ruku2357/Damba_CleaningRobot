@@ -161,7 +161,7 @@
 
 
 ## パラメータ
-    ```Python3:main
+    ```python:main
     #左キャタピラ
     motor1_pin = 17 #前進
     motor2_pin = 27 #後退
