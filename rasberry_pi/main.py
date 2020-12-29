@@ -7,10 +7,6 @@ import os
 import RPi.GPIO as GPIO
 
 import motor_arm
-#import manual
-
-#import led
-
 import ultrasonic_sensor_1
 import ultrasonic_sensor_2
 import ultrasonic_sensor_3
@@ -55,14 +51,13 @@ dis_dis_time = 0.5 #降るときの後退時の左右のセンサの時間の差
 GPIO.setwarnings(False)
     
 GPIO.setmode(GPIO.BCM)
-# GPIO出力モードを1に設定する
 GPIO.setup(motor1_pin,GPIO.OUT)
 GPIO.setup(motor2_pin,GPIO.OUT)
 GPIO.setup(motor3_pin,GPIO.OUT)
 GPIO.setup(motor4_pin,GPIO.OUT)
 time.sleep(0.3)
 
-def play():#9:stop
+def play():
 
     stairs = 0 #階段上
     sett = 0
@@ -71,7 +66,6 @@ def play():#9:stop
     GPIO.output(motor2_pin, False)
     GPIO.output(motor3_pin, True)
     GPIO.output(motor4_pin, False)
-    #前進
 
     while flag:
 

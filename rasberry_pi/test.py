@@ -1,6 +1,7 @@
 import threading
 import time
 import sys
+import os
 import ultrasonic_sensor_6
 
 def do():
@@ -20,7 +21,8 @@ def damba():
         if aa < 4:
             main.start()
             time.sleep(10)
-            sys.exit()
+            os.system("sudo shutdown -h now")
+            #sys.exit()
 
     setting = input("1:start order->")
     if setting == "1":
