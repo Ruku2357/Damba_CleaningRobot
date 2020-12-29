@@ -459,7 +459,10 @@ def controller():
                     GPIO.output(motor2_pin, False)
                     GPIO.output(motor3_pin, False)
                     GPIO.output(motor4_pin, False)
-                    GPIO.cleanup()
+                    try:
+                        GPIO.cleanup()
+                    except:
+                        pass
                     os.system("sudo shutdown -h now")
                 time.sleep(0.5)
         time.sleep(0.5)
