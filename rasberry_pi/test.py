@@ -68,3 +68,5 @@ def damba():
 #controller()
 
 log_damba.memo_write("aaaa")
+
+print("end")
