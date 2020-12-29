@@ -14,7 +14,6 @@
 ## GitHub説明
     上のファイル(Dambaシステムの説明)  
         circuit_diagram  
-        ![circuit_diagram](circuit_diagram4.png)
             回路図(番号が大きいものが最新)(感覚的に書きました)  
         main.py  
             自動化プログラム  
@@ -29,7 +28,8 @@
         その他  
             部品とかテストとかいろいろ  
     以下ラズパイのソフトウェア関係のメモや説明など  
-
+![circuit_diagram](circuit_diagram4.png)
+↑circuit_diagram
 
 ## やること
 ### ソフトウェア
