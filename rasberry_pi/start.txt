@@ -1,0 +1,23 @@
+
+
+sudo nano /lib/systemd/system/start.service
+
+[Unit]
+Description = start
+
+[Service]
+ExecStart=/usr/bin/python3 /home/pi/damba/rasberry_pi/main.py
+Restart=always
+Type=simple
+
+[Install]
+WantedBy=multi-user.target
+
+
+#ExecStartのパス確認　Python3のパスの場所確認
+
+$ sudo systemctl start start.service
+#起動できるかの確認
+
+$ sudo systemctl enable start.service
+#ラズパイ起動時にpython起動

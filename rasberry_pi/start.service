@@ -1,0 +1,10 @@
+[Unit]
+Description = start
+
+[Service]
+ExecStart=/usr/bin/python3 /home/pi/damba/rasberry_pi/main.py
+Restart=always
+Type=simple
+
+[Install]
+WantedBy=multi-user.target
