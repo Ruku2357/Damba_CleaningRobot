@@ -19,36 +19,37 @@ import ultrasonic_sensor_5
 import ultrasonic_sensor_6
 import ultrasonic_sensor_7
 
-#左
-motor1_pin = 17 #前
-motor2_pin = 27 #後
+#左キャタピラ
+motor1_pin = 17 #前進
+motor2_pin = 27 #後退
 
-#右
-motor3_pin = 24 #前
-motor4_pin = 23 #後
+#右キャタピラ
+motor3_pin = 24 #前進
+motor4_pin = 23 #後退
 
 #基本パラメータ
 setting = 0 #ステータス
 stairs = 0 #階段上
 flag = False #mainのループ
-stairs_time = 6 #階段から床への判断回数
+stairs_time = 5 #階段から床への判断回数
 
-setting_distance = 1 #稼働までの距離センサー１
-setting_distance2 = 3 #マニュアル稼働までの距離
+setting_distance = 2 #稼働までの距離センサー１
 
 #壁の対処パラメータ
 out_distance = 10 #壁を検知する距離(cm)
-go_back_time = 10 #壁に当たってから後退する時間(s)
-turn_time = 9 #壁に当たった時の回避するための回転時間(s)
-turn_time2 = 18 #壁に当たった時の回避するための回転時間(s)
+go_back_time = 5 #壁に当たってから後退する時間(s)
+turn_time = 10 #壁に当たった時の回避するための回転時間(s)左折
+turn_time2 = 20 #壁に当たった時の回避するための回転時間(s)右折
 wall_distance = 25 #壁か階段の距離(cm)(上の距離)(小さければ壁、大きければ階段)
 
 #階段上り
 step_turn_time = 2 #階段の回転(s)
 difference_distance = 0.5 #右前と前の許容差
+wall_d_distance = 3 #左右の調整時に近づきすぎの距離
+back_wall_time = 3 #近づきすぎた時の後退時間
 
 #階段下り
-under_out_distance = 10 #下の距離がどのくらい空いたらダメか
+under_out_distance = 10 #下の距離がどのくらい空いたらダメか、床と階段の判断の距離
 dis_dis_time = 0.5 #降るときの後退時の左右のセンサの時間の差
 
 GPIO.setwarnings(False)
@@ -116,6 +117,19 @@ def play():#9:stop
                     print(str(distance_sub1) + ":" + str(distance_sub2) + ":" + str(distance1))
                     
                     if distance["right_front"] != -1 and distance["left_front"] != -1:
+                        
+                        if distance["left_front"] <= wall_d_distance:
+
+                            print("近づきすぎバック")
+                            GPIO.output(motor1_pin, False)
+                            GPIO.output(motor2_pin, True)
+                            GPIO.output(motor3_pin, False)
+                            GPIO.output(motor4_pin, True)
+                            time.sleep(back_wall_time)
+                            GPIO.output(motor1_pin, False)
+                            GPIO.output(motor2_pin, False)
+                            GPIO.output(motor3_pin, False)
+                            GPIO.output(motor4_pin, False)
 
                         if distance1 >= difference_distance:#右が前に出てる
 
