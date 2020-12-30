@@ -1,7 +1,7 @@
 # DambaのRasberry Piについて
 ## GitHub使い方
     1.説明書  
-        ここに書いてあるもの(README.mdです。  
+        ここに書いてあるもの(README.md)です。  
     2.上のそれぞれのファイル  
         ファイル名をクリックするとファイルに書いてあることが見れます。  
         .pngだと画像が、.pyだとコードが、.txtだと説明書などが見れます。  
@@ -14,7 +14,7 @@
 ## GitHub説明
     上のファイル(Dambaシステムの説明)  
         circuit_diagram  
-            回路図(番号が大きいものが最新)(感覚的に書きました)  
+            回路図(感覚的に書きました)  
         main.py  
             自動化プログラム  
         manual.py  
@@ -32,6 +32,9 @@
 ## circuit_diagram
 ![circuit_diagram](circuit_diagram4.png)
 
+## sensor_placement
+![sensor_placement](sensor_placement.png)
+
 
 ## やること
 ### ソフトウェア
@@ -44,12 +47,6 @@
         前進の時同じ  
         引っかかってる？  
     ゴムが取れる  
-
-
-## できること
-    6番センサーで稼働、停止(距離まで手を近づける2cm)  
-    上階段、下階段、壁を判別し対処できる  
-    掃き掃除？ができる  
 
 
 
