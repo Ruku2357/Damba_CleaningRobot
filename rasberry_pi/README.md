@@ -30,7 +30,7 @@
     以下ラズパイのソフトウェア関係のメモや説明など  
 
 ## circuit_diagram
-![circuit_diagram](circuit_diagram4.png)
+![circuit_diagram](circuit_diagram5.png)
 
 ## sensor_placement
 ![sensor_placement](sensor_placement.png)
