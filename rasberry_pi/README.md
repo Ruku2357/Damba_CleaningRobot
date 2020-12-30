@@ -33,7 +33,7 @@
 ![circuit_diagram](circuit_diagram5.png)
 
 ## sensor_placement
-![sensor_placement](sensor_placement2.png)
+![sensor_placement](sensor_placement3.png)
 
 
 ## やること
