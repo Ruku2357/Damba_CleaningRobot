@@ -266,7 +266,7 @@ dis_dis_time = 0.5 #降るときの後退時の左右のセンサの時間の差
 
 ## ラズパイメモ
     RPI.GPIO
-        output->1  GPIO.HIGH   True
+        output->  1  GPIO.HIGH   True
     ラズパイライト
         赤のみ→起動してない
         赤と緑→起動してる(緑：何かのファイルをmicroSDに書き込んでる)

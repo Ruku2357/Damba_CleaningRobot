@@ -63,7 +63,7 @@ def play():
 
     stairs = 0 #階段上
     sett = 0
-    print("前進")
+    print("開始時前進---------------------------")")
     log_damba.memo_write("開始時前進---------------------------")
     GPIO.output(motor1_pin, True)
     GPIO.output(motor2_pin, False)
