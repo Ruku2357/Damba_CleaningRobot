@@ -204,7 +204,7 @@ dis_dis_time = 0.5 #降るときの後退時の左右のセンサの時間の差
     1->GPIO 5 
     2->GPIO 6 
     3->モータ
-    4->GND :PIN 6
+    4->GND
     5->モータ
     6->なし
     7->電池ボックス
@@ -212,7 +212,7 @@ dis_dis_time = 0.5 #降るときの後退時の左右のセンサの時間の差
     1->GPIO 24
     2->GPIO 24
     3->モータ
-    4->GND :PIN 6
+    4->GND
     5->モータ
     6->なし
     7->電池ボックス
@@ -220,44 +220,44 @@ dis_dis_time = 0.5 #降るときの後退時の左右のセンサの時間の差
     1->GPIO 17
     2->GPIO 27
     3->モータ
-    4->GND :PIN 6
+    4->GND
     5->モータ
     6->なし
     7->電池ボックス
 ### 超音波センサー1前
     1->5V(ラズパイ)
-    2->GPIO 14 :PIN 8 (trig)
-    3->GPIO 15 :PIN 10 (echo)
+    2->GPIO 14(trig)
+    3->GPIO 15(echo)
     4->GND
 ### 超音波センサー2右下(右)
     1->5V(ラズパイ)
-    2->GPIO 25 :PIN 22 (trig)
-    3->GPIO ８ :PIN  (echo)
+    2->GPIO 25(trig)
+    3->GPIO ８(echo)
     4->GND
 ### 超音波センサー3右前
     1->5V(ラズパイ)
-    2->GPIO  7:PIN  (trig)
-    3->GPIO  1:PIN  (echo)
+    2->GPIO  7(trig)
+    3->GPIO  1(echo)
     4->GND
 ### 超音波センサー4左下(左)
     1->5V(ラズパイ)
-    2->GPIO 12 :PIN  (trig)
-    3->GPIO 16 :PIN  (echo)
+    2->GPIO 12(trig)
+    3->GPIO 16(echo)
     4->GND
 ### 超音波センサー5左前
     1->5V(ラズパイ)
-    2->GPIO 20 :PIN  (trig)
-    3->GPIO 21 :PIN  (echo)
+    2->GPIO 20(trig)
+    3->GPIO 21(echo)
     4->GND
 ### 超音波センサー6UI
     1->5V(ラズパイ)
-    2->GPIO 19 :PIN  (trig)
-    3->GPIO 26 :PIN  (echo)
+    2->GPIO 19(trig)
+    3->GPIO 26(echo)
     4->GND
 ### 超音波センサー7下(壊れた)
     1->5V(ラズパイ)
-    2->GPIO 9 :PIN  (trig)
-    3->GPIO 11 :PIN  (echo)
+    2->GPIO 9(trig)
+    3->GPIO 11(echo)
     4->GND
 ### LED(なし)
     1->GPIO 10 長い方
