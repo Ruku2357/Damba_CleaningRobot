@@ -516,6 +516,8 @@ def controller():
                         GPIO.cleanup()
                     except:
                         pass
+                    print("~~~~~~~~~~~システム停止~~~~~~~~~~~")
+                    log_damba.memo_write("~~~~~~~~~~~システ停止~~~~~~~~~~~")
                     os.system("sudo shutdown -h now")
                 time.sleep(1)
         time.sleep(0.5)
@@ -525,7 +527,7 @@ def no_controller():
     flag = True
     play()
 
-print("##########システム開始##########")
-log_damba.memo_write("##########システム開始##########")
+print("~~~~~~~~~~~システム開始~~~~~~~~~~~")
+log_damba.memo_write("~~~~~~~~~~~システム開始~~~~~~~~~~~")
 #controller()
 no_controller()
