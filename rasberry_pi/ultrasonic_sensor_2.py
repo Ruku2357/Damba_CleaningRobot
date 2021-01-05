@@ -35,7 +35,7 @@ def reading(sensor):
           #print("sensor1：" + str(distance) + "cm")
           return distance
         if distance > 300:
-          #print("エラー2(100cmまで)")
+          #print("エラー2(300cmまで)")
           return miss_distance
     else:
         print("1でセンサー起動．")
