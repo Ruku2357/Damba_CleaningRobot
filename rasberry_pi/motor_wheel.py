@@ -138,11 +138,8 @@ def move(order, second):
         GPIO.output(motor6_pin, True)
 
     elif order == "end":
-        if second == 0:
-            print("left_を止める時は 0コマンド！")
-        else:
-            print(str(second))
         GPIO.cleanup()
+        sys.exit()
 
 
     time.sleep(second)
