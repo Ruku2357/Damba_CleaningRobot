@@ -7,7 +7,7 @@ import log_damba
 
 def do():
     i = 0
-    while True:
+    while flag:
         print(i)
         i = i + 1
         time.sleep(1)
@@ -22,27 +22,28 @@ flag = False
 setting_distance = 3
 def controller():   
 
+    global flag
     control = threading.Thread(target=do)
     control.setDaemon(True)
-    control1 = threading.Thread(target=do)
-    control1.setDaemon(True)
     while True:
         setting_d = ultrasonic_sensor_6.reading(1)
 
         if setting_d <= setting_distance:
-            control.start()
+            print("=========プログラム開始==========")
+            log_damba.memo_write("=========プログラム開始==========")
             flag = True
-            print(str(flag))
-            time.sleep(3)
+            control.start()
+            time.sleep(10)
             while True:
                 setting_d = ultrasonic_sensor_6.reading(1)
                 if setting_d <= setting_distance:
+                    print("=========プログラム停止==========")
+                    log_damba.memo_write("=========プログラム停止==========")
                     flag = False
-                    print(str(flag))
-                    control1.start()
-                    time.sleep(10)
+                    print("~~~~~~~~~~~システム停止~~~~~~~~~~~")
+                    log_damba.memo_write("~~~~~~~~~~~システ停止~~~~~~~~~~~")
                     os.system("sudo shutdown -h now")
-                time.sleep(0.5)
+                time.sleep(1)
         time.sleep(0.5)
 
 def damba():
@@ -56,7 +57,7 @@ def damba():
         if aa < 4:
             main.start()
             time.sleep(10)
-            os.system("sudo shutdown -h now")
+            #os.system("sudo shutdown -h now")
             #sys.exit()
 
     setting = input("1:start order->")

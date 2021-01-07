@@ -29,19 +29,19 @@ motor4_pin = 23 #後退
 setting = 0 #ステータス
 stairs = 0 #階段上
 flag = False #mainのループ
-stairs_time = 5 #階段から床への判断回数
+stairs_time = 3 #階段から床への判断回数
 
 setting_distance = 2 #稼働までの距離センサー１
 
 #壁の対処パラメータ
 out_distance = 5 #壁を検知する距離(cm)
-go_back_time = 5 #壁に当たってから後退する時間(s)
-turn_time = 10 #壁に当たった時の回避するための回転時間(s)左折
-turn_time2 = 20 #壁に当たった時の回避するための回転時間(s)右折
+go_back_time = 2 #壁に当たってから後退する時間(s)
+turn_time = 5 #壁に当たった時の回避するための回転時間(s)左折
+turn_time2 = 5 #壁に当たった時の回避するための回転時間(s)右折
 wall_distance = 25 #壁か階段の距離(cm)(上の距離)(小さければ壁、大きければ階段)
 
 #階段上り
-step_turn_time = 2 #階段の回転(s)
+step_turn_time = 0.5 #階段の回転(s)
 difference_distance = 0.5 #右前と前の許容差
 wall_d_distance = 3 #左右の調整時に近づきすぎの距離
 back_wall_time = 3 #近づきすぎた時の後退時間
@@ -486,28 +486,68 @@ def play():
         time.sleep(0.1)
         sett = 0
         print(sett)
-        #print("end")
 
 def controller():   
 
     global flag
     control = threading.Thread(target=play)
     control.setDaemon(True)
+    GPIO.output(motor1_pin, False)
+    GPIO.output(motor2_pin, False)
+    GPIO.output(motor3_pin, True)
+    GPIO.output(motor4_pin, False)
+    time.sleep(0.3)
+    GPIO.output(motor1_pin, False)
+    GPIO.output(motor2_pin, False)
+    GPIO.output(motor3_pin, False)
+    GPIO.output(motor4_pin, False)
+    time.sleep(0.3)
+    GPIO.output(motor1_pin, True)
+    GPIO.output(motor2_pin, False)
+    GPIO.output(motor3_pin, False)
+    GPIO.output(motor4_pin, False)
+    time.sleep(0.3)
+    GPIO.output(motor1_pin, False)
+    GPIO.output(motor2_pin, False)
+    GPIO.output(motor3_pin, False)
+    GPIO.output(motor4_pin, False)
     while True:
         setting_d = ultrasonic_sensor_6.reading(1)
+        setting_d2 = ultrasonic_sensor_1.reading(1)
+        setting_d3 = ultrasonic_sensor_3.reading(1)
 
         if setting_d <= setting_distance:
             print("=========プログラム開始==========")
             log_damba.memo_write("=========プログラム開始==========")
             flag = True
             control.start()
-            time.sleep(10)
+            time.sleep(3)
             while True:
                 setting_d = ultrasonic_sensor_6.reading(1)
                 if setting_d <= setting_distance:
                     print("=========プログラム停止==========")
                     log_damba.memo_write("=========プログラム停止==========")
                     flag = False
+                    GPIO.output(motor1_pin, False)
+                    GPIO.output(motor2_pin, False)
+                    GPIO.output(motor3_pin, False)
+                    GPIO.output(motor4_pin, False)
+                    time.sleep(2)
+                    GPIO.output(motor1_pin, False)
+                    GPIO.output(motor2_pin, True)
+                    GPIO.output(motor3_pin, False)
+                    GPIO.output(motor4_pin, False)
+                    time.sleep(0.3)
+                    GPIO.output(motor1_pin, False)
+                    GPIO.output(motor2_pin, False)
+                    GPIO.output(motor3_pin, False)
+                    GPIO.output(motor4_pin, False)
+                    time.sleep(0.3)
+                    GPIO.output(motor1_pin, False)
+                    GPIO.output(motor2_pin, False)
+                    GPIO.output(motor3_pin, False)
+                    GPIO.output(motor4_pin, True)
+                    time.sleep(0.3)
                     GPIO.output(motor1_pin, False)
                     GPIO.output(motor2_pin, False)
                     GPIO.output(motor3_pin, False)
@@ -519,15 +559,52 @@ def controller():
                     print("~~~~~~~~~~~システム停止~~~~~~~~~~~")
                     log_damba.memo_write("~~~~~~~~~~~システ停止~~~~~~~~~~~")
                     os.system("sudo shutdown -h now")
-                time.sleep(1)
-        time.sleep(0.5)
+                time.sleep(0.5)
+
+        if setting_d2 <= setting_distance and setting_d3 <= setting_distance:
+            print("=========プログラム停止==========")
+            log_damba.memo_write("=========プログラム停止==========")
+            flag = False
+            GPIO.output(motor1_pin, False)
+            GPIO.output(motor2_pin, False)
+            GPIO.output(motor3_pin, False)
+            GPIO.output(motor4_pin, False)
+            time.sleep(2)
+            GPIO.output(motor1_pin, False)
+            GPIO.output(motor2_pin, True)
+            GPIO.output(motor3_pin, False)
+            GPIO.output(motor4_pin, False)
+            time.sleep(0.3)
+            GPIO.output(motor1_pin, False)
+            GPIO.output(motor2_pin, False)
+            GPIO.output(motor3_pin, False)
+            GPIO.output(motor4_pin, False)
+            time.sleep(0.3)
+            GPIO.output(motor1_pin, False)
+            GPIO.output(motor2_pin, False)
+            GPIO.output(motor3_pin, False)
+            GPIO.output(motor4_pin, True)
+            time.sleep(0.3)
+            GPIO.output(motor1_pin, False)
+            GPIO.output(motor2_pin, False)
+            GPIO.output(motor3_pin, False)
+            GPIO.output(motor4_pin, False)
+            try:
+                GPIO.cleanup()
+            except:
+                pass
+            print("~~~~~~~~~~~システム停止~~~~~~~~~~~")
+            log_damba.memo_write("~~~~~~~~~~~システ停止~~~~~~~~~~~")
+            sys.exit()
+
+        time.sleep(0.1)
 
 def no_controller():
     global flag
     flag = True
-    play()
+    #play()
 
 print("~~~~~~~~~~~システム開始~~~~~~~~~~~")
 log_damba.memo_write("~~~~~~~~~~~システム開始~~~~~~~~~~~")
 #controller()
-no_controller()
+#no_controller()

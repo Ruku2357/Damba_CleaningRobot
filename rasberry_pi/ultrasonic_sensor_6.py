@@ -1,5 +1,6 @@
 import time
 
+import log_damba
 import RPi.GPIO as GPIO
 
 def reading(sensor):
@@ -27,8 +28,12 @@ def reading(sensor):
          
         while GPIO.input(ECHO) == 1: #ECHOがLOWになった瞬間
           signalon = time.time()
- 
-        timepassed = signalon - signaloff #送信から受信の時間
+        try:
+          timepassed = signalon - signaloff #送信から受信の時間
+        except:
+          timepassed = 1
+          print("timepassederror")
+          log_damba.memo_write("timepassederror")
         distance = timepassed * 340 * 100 / 2 #cm 
         
         if distance <= 300:
@@ -49,8 +54,12 @@ def reading(sensor):
           
           while GPIO.input(ECHO) == 1: #ECHOがLOWになった瞬間
             signalon = time.time()
-  
-          timepassed = signalon - signaloff #送信から受信の時間
+          try:
+            timepassed = signalon - signaloff #送信から受信の時間
+          except:
+            timepassed = 1
+            print("timepassederror")
+            log_damba.memo_write("timepassederror")
           distance = timepassed * 340 * 100 / 2 #cm 
           if distance <= 300:
             #print("sensor1：" + str(distance) + "cm")
