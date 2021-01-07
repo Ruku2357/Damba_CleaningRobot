@@ -3,7 +3,6 @@ import sys
 
 import motor_arm
 import motor_wheel as motor_wheel
-import led
 
 import ultrasonic_sensor_1
 

@@ -7,7 +7,6 @@ import ultrasonic_sensor_4
 import ultrasonic_sensor_5
 import ultrasonic_sensor_6
 import ultrasonic_sensor_7
-import led
 
 import RPi.GPIO as GPIO
 

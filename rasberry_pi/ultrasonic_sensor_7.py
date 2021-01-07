@@ -30,6 +30,7 @@ def reading(sensor):
  
         timepassed = signalon - signaloff #送信から受信の時間
         distance = timepassed * 340 * 100 / 2 #cm 
+        distance = 444
         
         if distance <= 300:
           #print("sensor1：" + str(distance) + "cm")
