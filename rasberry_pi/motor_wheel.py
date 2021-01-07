@@ -125,6 +125,18 @@ def move(order, second):
         GPIO.output(motor5_pin, True)
         GPIO.output(motor6_pin, False)
 
+    elif order == "dan２":
+        if second == 0:
+            print("left_onlyを止める時は 0コマンド！")
+        else:
+            print(str(second)+"s,only")
+        GPIO.output(motor1_pin, True)
+        GPIO.output(motor2_pin, False)
+        GPIO.output(motor3_pin, True)
+        GPIO.output(motor4_pin, False)
+        GPIO.output(motor5_pin, False)
+        GPIO.output(motor6_pin, True)
+
     elif order == "end":
         if second == 0:
             print("left_を止める時は 0コマンド！")
