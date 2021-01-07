@@ -34,7 +34,7 @@ stairs_time = 5 #階段から床への判断回数
 setting_distance = 2 #稼働までの距離センサー１
 
 #壁の対処パラメータ
-out_distance = 10 #壁を検知する距離(cm)
+out_distance = 5 #壁を検知する距離(cm)
 go_back_time = 5 #壁に当たってから後退する時間(s)
 turn_time = 10 #壁に当たった時の回避するための回転時間(s)左折
 turn_time2 = 20 #壁に当たった時の回避するための回転時間(s)右折
