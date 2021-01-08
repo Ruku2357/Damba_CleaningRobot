@@ -459,10 +459,13 @@ def play():
             stairs = 1
 
         if stairs == 1:
+            
             print("階段通過中")
             log_damba.memo_write("階段通過中")
+
             t = 0
             while True:
+
                 distance_stairs1 = ultrasonic_sensor_2.reading(1)
                 distance_stairs2 = ultrasonic_sensor_4.reading(1)
                 distance["right_under"] = distance_stairs1
@@ -492,6 +495,7 @@ def controller():
     global flag
     control = threading.Thread(target=play)
     control.setDaemon(True)
+
     GPIO.output(motor1_pin, False)
     GPIO.output(motor2_pin, False)
     GPIO.output(motor3_pin, True)
@@ -512,6 +516,7 @@ def controller():
     GPIO.output(motor3_pin, False)
     GPIO.output(motor4_pin, False)
     while True:
+
         setting_d = ultrasonic_sensor_6.reading(1)
         setting_d2 = ultrasonic_sensor_1.reading(1)
         setting_d3 = ultrasonic_sensor_3.reading(1)
@@ -519,15 +524,19 @@ def controller():
         if setting_d <= setting_distance:
             print("=========プログラム開始==========")
             log_damba.memo_write("=========プログラム開始==========")
+
             flag = True
             control.start()
             time.sleep(3)
+
             while True:
                 setting_d = ultrasonic_sensor_6.reading(1)
                 if setting_d <= setting_distance:
+
                     print("=========プログラム停止==========")
                     log_damba.memo_write("=========プログラム停止==========")
                     flag = False
+
                     GPIO.output(motor1_pin, False)
                     GPIO.output(motor2_pin, False)
                     GPIO.output(motor3_pin, False)
@@ -552,10 +561,12 @@ def controller():
                     GPIO.output(motor2_pin, False)
                     GPIO.output(motor3_pin, False)
                     GPIO.output(motor4_pin, False)
+
                     try:
                         GPIO.cleanup()
                     except:
                         pass
+
                     print("~~~~~~~~~~~システム停止~~~~~~~~~~~")
                     log_damba.memo_write("~~~~~~~~~~~システム停止~~~~~~~~~~~")
                     os.system("sudo shutdown -h now")
@@ -565,6 +576,7 @@ def controller():
             print("=========プログラム停止==========")
             log_damba.memo_write("=========プログラム停止==========")
             flag = False
+
             GPIO.output(motor1_pin, False)
             GPIO.output(motor2_pin, False)
             GPIO.output(motor3_pin, False)
@@ -589,10 +601,12 @@ def controller():
             GPIO.output(motor2_pin, False)
             GPIO.output(motor3_pin, False)
             GPIO.output(motor4_pin, False)
+
             try:
                 GPIO.cleanup()
             except:
                 pass
+
             print("~~~~~~~~~~~システム停止~~~~~~~~~~~")
             log_damba.memo_write("~~~~~~~~~~~システム停止~~~~~~~~~~~")
             sys.exit()
