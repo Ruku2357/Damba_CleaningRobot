@@ -557,7 +557,7 @@ def controller():
                     except:
                         pass
                     print("~~~~~~~~~~~システム停止~~~~~~~~~~~")
-                    log_damba.memo_write("~~~~~~~~~~~システ停止~~~~~~~~~~~")
+                    log_damba.memo_write("~~~~~~~~~~~システム停止~~~~~~~~~~~")
                     os.system("sudo shutdown -h now")
                 time.sleep(0.5)
 
@@ -594,7 +594,7 @@ def controller():
             except:
                 pass
             print("~~~~~~~~~~~システム停止~~~~~~~~~~~")
-            log_damba.memo_write("~~~~~~~~~~~システ停止~~~~~~~~~~~")
+            log_damba.memo_write("~~~~~~~~~~~システム停止~~~~~~~~~~~")
             sys.exit()
 
         time.sleep(0.1)
