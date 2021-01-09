@@ -32,8 +32,8 @@ def reading(sensor):
           timepassed = signalon - signaloff #送信から受信の時間
         except:
           timepassed = 1
-          print("timepassederror")
-          log_damba.memo_write("timepassederror")
+          print("timepassederror4")
+          log_damba.memo_write("timepassederror4")
         distance = timepassed * 340 * 100 / 2 #cm 
         
         if distance <= 300:

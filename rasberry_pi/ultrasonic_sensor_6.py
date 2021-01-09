@@ -17,7 +17,7 @@ def reading(sensor):
         GPIO.setup(TRIG,GPIO.OUT)
         GPIO.setup(ECHO,GPIO.IN)
         GPIO.output(TRIG, GPIO.LOW)
-        time.sleep(0.3)
+        time.sleep(0.2)
          
         GPIO.output(TRIG, True)#超音波の送信
         time.sleep(0.00001)
@@ -32,8 +32,8 @@ def reading(sensor):
           timepassed = signalon - signaloff #送信から受信の時間
         except:
           timepassed = 1
-          print("timepassederror")
-          log_damba.memo_write("timepassederror")
+          print("timepassederror6")
+          log_damba.memo_write("timepassederror6")
         distance = timepassed * 340 * 100 / 2 #cm 
         
         if distance <= 300:
@@ -43,7 +43,7 @@ def reading(sensor):
           GPIO.setup(TRIG,GPIO.OUT)
           GPIO.setup(ECHO,GPIO.IN)
           GPIO.output(TRIG, GPIO.LOW)
-          time.sleep(0.3)
+          time.sleep(0.1)
           
           GPIO.output(TRIG, True)#超音波の送信
           time.sleep(0.00001)

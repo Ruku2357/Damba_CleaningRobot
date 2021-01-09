@@ -8,8 +8,8 @@ def reading(sensor):
     GPIO.setwarnings(False)
      
     GPIO.setmode(GPIO.BCM)
-    TRIG = 7 #20
-    ECHO = 1 #21
+    TRIG = 20 #20
+    ECHO = 21 #21
 
     miss_distance = -1
      
@@ -17,7 +17,7 @@ def reading(sensor):
         GPIO.setup(TRIG,GPIO.OUT)
         GPIO.setup(ECHO,GPIO.IN)
         GPIO.output(TRIG, GPIO.LOW)
-        time.sleep(0.3)
+        time.sleep(0.2)
          
         GPIO.output(TRIG, True)#超音波の送信
         time.sleep(0.00001)
@@ -32,8 +32,8 @@ def reading(sensor):
           timepassed = signalon - signaloff #送信から受信の時間
         except:
           timepassed = 1
-          print("timepassederror")
-          log_damba.memo_write("timepassederror")
+          print("timepassederror5")
+          log_damba.memo_write("timepassederror5")
         distance = timepassed * 340 * 100 / 2 #cm 
         
         if distance <= 300:

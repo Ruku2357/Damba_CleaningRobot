@@ -8,13 +8,13 @@ import RPi.GPIO as GPIO
 
 def move(order, second):
 
-    #左
-    motor1_pin = 17 #前
-    motor2_pin = 27 #後
+    #左キャタピラ
+    motor1_pin = 17 #前進
+    motor2_pin = 22 #後退27
 
-    #右
-    motor3_pin = 24 #前
-    motor4_pin = 23 #後
+    #右キャタピラ
+    motor3_pin = 24 #前進
+    motor4_pin = 18 #後退23
 
 
     motor5_pin = 5
